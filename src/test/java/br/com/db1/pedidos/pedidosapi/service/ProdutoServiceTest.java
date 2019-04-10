@@ -29,7 +29,7 @@ public class ProdutoServiceTest {
 	@Test
 	public void deveriaRetornarTodosOsProdutos() {
 
-		Iterable<Produto> value = Arrays.asList(new Produto("A", "A", 10.0));
+		List<Produto> value = Arrays.asList(new Produto("A", "A", 10.0));
 		BDDMockito.when(produtoRepository.findAll()).thenReturn(value);
 
 		List<ProdutoDTO> expected = new ArrayList<>();

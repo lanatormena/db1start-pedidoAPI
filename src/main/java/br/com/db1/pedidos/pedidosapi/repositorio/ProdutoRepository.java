@@ -1,13 +1,15 @@
 package br.com.db1.pedidos.pedidosapi.repositorio;
 
-import org.springframework.data.repository.CrudRepository;
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import br.com.db1.pedidos.pedidosapi.domain.entity.Produto;
 import br.com.db1.pedidos.pedidosapi.domain.entity.ProdutoStatus;
 
-public interface ProdutoRepository extends CrudRepository<Produto, Long> {
+public interface ProdutoRepository extends JpaRepository<Produto, Long> {
 
 	Produto findByCodigo(String codigo);
 
-	Iterable<Produto> findByStatus(ProdutoStatus status);
+	List<Produto> findByStatus(ProdutoStatus status);
 }

@@ -42,6 +42,21 @@ public class Cliente {
 		this.status = ClienteStatus.ATIVO;
 	}
 
+	public void setCpf(String cpf) {
+		Verificador.naoNulo(nome, "nome do cliente");
+		Verificador.naoNulo(cpf, "CPF do cliente");
+		this.cpf = cpf;
+	}
+
+	public void setNome(String nome) {
+		Verificador.naoNulo(nome, "nome do cliente");
+		this.nome = nome;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
 	public String getNome() {
 		return nome;
 	}

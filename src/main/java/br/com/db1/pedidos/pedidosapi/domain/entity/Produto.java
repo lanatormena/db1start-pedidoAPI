@@ -31,8 +31,9 @@ public class Produto {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "status", length = 30, nullable = false)
 	private ProdutoStatus status;
-	
-	protected Produto() {}
+
+	protected Produto() {
+	}
 
 	public Produto(String codigo, String nome, Double valor) {
 		Verificador.naoNulo(codigo, "código do produto");
@@ -70,5 +71,24 @@ public class Produto {
 
 	public ProdutoStatus getStatus() {
 		return status;
+	}
+
+	public void setCodigo(String codigo) {
+		Verificador.naoNulo(codigo, "código do produto");
+		this.codigo = codigo;
+	}
+
+	public void setNome(String nome) {
+		Verificador.naoNulo(nome, "nome do produto");
+		this.nome = nome;
+	}
+
+	public void setValor(Double valor) {
+		Verificador.naoNulo(valor, "valor do produto");
+		this.valor = valor;
+	}
+
+	public void setStatus(ProdutoStatus status) {
+		this.status = status;
 	}
 }

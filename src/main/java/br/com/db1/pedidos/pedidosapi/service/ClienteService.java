@@ -1,11 +1,15 @@
 package br.com.db1.pedidos.pedidosapi.service;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.validation.ConstraintViolationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.w3c.dom.ranges.RangeException;
 
 import br.com.db1.pedidos.pedidosapi.domain.dto.ClienteDTO;
 import br.com.db1.pedidos.pedidosapi.domain.entity.Cliente;
@@ -18,18 +22,37 @@ public class ClienteService {
 	
 		@Autowired
 		private ClienteRepository clienteRepository;
-
-		List<ClienteDTO> cliente = new ArrayList<>();
 		
-		public List<ClienteDTO> getAll() {
-			Iterable<Cliente> clienteDataBase = clienteRepository.findByStatus(ClienteStatus.ATIVO);
-			Iterator<Cliente> iterator = clienteDataBase.iterator();
-			
-			while (iterator.hasNext()) {
-				Cliente next = iterator.next();
-				ClienteDTO clienteDTO = new ClienteDTO(next.getNome(), next.getCpf());
-				cliente.add(clienteDTO);
+		public List<ClienteDTO> getAllActive() {
+			return this.getByStatus(ClienteStatus.ATIVO);
+		}
+		
+		public List<ClienteDTO> getByStatus(ClienteStatus status){
+			return clienteRepository
+					.findByStatus(status)
+					.stream()
+					.map(cliente -> this.clienteToDto(cliente))
+					.collect(Collectors.toList());
+		}	
+		
+		public ClienteDTO salvar(ClienteDTO dto) {
+		Cliente cliente =  new Cliente(dto.getNome(), dto.getCpf());
+		Cliente clienteSalvo = clienteRepository.save(cliente);
+		return this.clienteToDto(clienteSalvo);
+	}
+		private ClienteDTO clienteToDto(Cliente cliente) {
+			return new ClienteDTO(cliente.getId(), cliente.getNome(), cliente.getCpf(), cliente.getStatus());
+		}
+
+		public ClienteDTO alterar(Long id, ClienteDTO body) {
+			try {
+			Cliente clienteDatabase =  clienteRepository.getOne(id);
+			clienteDatabase.setCpf(body.getCpf());
+			clienteDatabase.setNome(body.getNome());
+			clienteRepository.save(clienteDatabase);
+			return this.clienteToDto(clienteDatabase);
+			}catch (ConstraintViolationException e) {
+				throw new RuntimeException("CPF Duplicado");
 			}
-			return cliente;
 		}
 }
