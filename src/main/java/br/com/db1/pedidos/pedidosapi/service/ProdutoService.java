@@ -1,7 +1,5 @@
 package br.com.db1.pedidos.pedidosapi.service;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -10,9 +8,7 @@ import javax.validation.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.db1.pedidos.pedidosapi.domain.dto.ClienteDTO;
 import br.com.db1.pedidos.pedidosapi.domain.dto.ProdutoDTO;
-import br.com.db1.pedidos.pedidosapi.domain.entity.Cliente;
 import br.com.db1.pedidos.pedidosapi.domain.entity.Produto;
 import br.com.db1.pedidos.pedidosapi.domain.entity.ProdutoStatus;
 import br.com.db1.pedidos.pedidosapi.repositorio.ProdutoRepository;
@@ -51,7 +47,7 @@ public class ProdutoService {
 			produtoRepository.save(produtoDatabase);
 			return this.produtoToDto(produtoDatabase);
 		} catch (ConstraintViolationException e) {
-			throw new RuntimeException("Código do produto está duplicado");
+			throw new RuntimeException("Código do produto esta duplicado");
 		}
 	}
 

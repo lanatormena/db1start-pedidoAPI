@@ -9,7 +9,5 @@ import br.com.db1.pedidos.pedidosapi.domain.entity.ClienteStatus;
 
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {
 
-	Cliente findByCpf(String cpf);
-
 	List<Cliente> findByStatus(ClienteStatus status);
 }

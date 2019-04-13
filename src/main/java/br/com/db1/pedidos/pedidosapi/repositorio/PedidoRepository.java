@@ -1,10 +1,9 @@
 package br.com.db1.pedidos.pedidosapi.repositorio;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import br.com.db1.pedidos.pedidosapi.domain.entity.Pedido;
 
-public interface PedidoRepository extends CrudRepository<Pedido, Long> {
+public interface PedidoRepository extends JpaRepository<Pedido, Long> {
 
-	Pedido findByCodigo(String codigo);
 }

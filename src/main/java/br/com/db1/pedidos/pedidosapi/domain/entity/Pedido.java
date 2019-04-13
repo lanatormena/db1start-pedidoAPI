@@ -52,12 +52,12 @@ public class Pedido {
 	private List<PedidoItem> itens = new ArrayList<>();
 
 	public Pedido(String codigo, Cliente cliente) {
-		Verificador.naoNulo(codigo, "c�digo");
+		Verificador.naoNulo(codigo, "codigo");
 		Verificador.naoNulo(cliente, "cliente");
-		this.verificarClienteAtivo();
-
 		this.codigo = codigo;
 		this.cliente = cliente;
+		this.status = PedidoStatus.ABERTO;
+		this.verificarClienteAtivo();
 		this.novoHistoricoStatus();
 	}
 
@@ -65,7 +65,7 @@ public class Pedido {
 		this.verificarStatusPedidoParaAlterar();
 
 		if (this.itens.size() == QUANTIDADE_MAXIMA_ITENS) {
-			throw new RuntimeException("Quantidade m�xima de itens excedida: " + QUANTIDADE_MAXIMA_ITENS);
+			throw new RuntimeException("Quantidade maxima de itens excedida: " + QUANTIDADE_MAXIMA_ITENS);
 		}
 
 		this.itens.add(new PedidoItem(this, produto, quantidade));
@@ -78,12 +78,12 @@ public class Pedido {
 
 	public void faturar() {
 		if (!PedidoStatus.ABERTO.equals(this.status)) {
-			throw new RuntimeException("Pedido est�  " + this.status);
+			throw new RuntimeException("Pedido esta  " + this.status);
 		}
 
 		if (this.itens.size() == 0 || this.itens.size() > QUANTIDADE_MAXIMA_ITENS) {
 			throw new RuntimeException(
-					"Pedido deve ter no min�mo 1 item e no m�ximo 10 itens. Quantidade atual: " + this.itens.size());
+					"Pedido deve ter no minimo 1 item e no maximo 10 itens. Quantidade atual: " + this.itens.size());
 		}
 
 		this.verificarClienteAtivo();
@@ -100,7 +100,7 @@ public class Pedido {
 
 	public void reabrir() {
 		if (!PedidoStatus.CANCELADO.equals(this.status)) {
-			throw new RuntimeException("Pedido est� " + this.status);
+			throw new RuntimeException("Pedido esta " + this.status);
 		}
 
 		this.status = PedidoStatus.ABERTO;
@@ -139,13 +139,13 @@ public class Pedido {
 
 	private void verificarClienteAtivo() {
 		if (!cliente.isAtivo()) {
-			throw new RuntimeException("Cliente " + cliente.getNome() + " est� inativo");
+			throw new RuntimeException("Cliente " + cliente.getNome() + " esta inativo");
 		}
 	}
 
 	private void verificarStatusPedidoParaAlterar() {
 		if (!PedidoStatus.ABERTO.equals(this.status)) {
-			throw new RuntimeException("Pedido est�  " + this.status);
+			throw new RuntimeException("Pedido esta  " + this.status);
 		}
 	}
 }

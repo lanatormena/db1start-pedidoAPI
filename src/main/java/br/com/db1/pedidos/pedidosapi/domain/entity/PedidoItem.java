@@ -39,7 +39,7 @@ public class PedidoItem {
 		Verificador.maiorQueZero(quantidade, "quantidade");
 
 		if (!produto.isAtivo()) {
-			throw new RuntimeException("Produto " + produto.getNome() + " est� " + produto.getStatus());
+			throw new RuntimeException("Produto " + produto.getNome() + " esta " + produto.getStatus());
 		}
 
 		this.pedido = pedido;

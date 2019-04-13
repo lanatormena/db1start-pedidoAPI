@@ -14,8 +14,8 @@ public class ClienteDTO implements Serializable {
 
 	public ClienteDTO() {
 
-
 	}
+
 	public ClienteDTO(Long id, String nome, String cpf, ClienteStatus status) {
 		super();
 		this.id = id;
@@ -23,8 +23,6 @@ public class ClienteDTO implements Serializable {
 		this.cpf = cpf;
 		this.status = status;
 	}
-
-
 
 	public Long getId() {
 		return id;
@@ -57,7 +55,5 @@ public class ClienteDTO implements Serializable {
 	public void setStatus(ClienteStatus status) {
 		this.status = status;
 	}
-	
-
 
 }

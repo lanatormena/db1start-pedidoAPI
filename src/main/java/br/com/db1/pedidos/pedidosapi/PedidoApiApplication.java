@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class PedidosApiApplication {
+public class PedidoApiApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(PedidosApiApplication.class, args);
+		SpringApplication.run(PedidoApiApplication.class, args);
 	}
 }

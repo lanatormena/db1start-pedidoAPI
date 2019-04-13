@@ -35,7 +35,7 @@ public class ProdutoServiceTest {
 		List<ProdutoDTO> expected = new ArrayList<>();
 		expected.add(new ProdutoDTO("A", "A", 10.0));
 
-		List<ProdutoDTO> actual = produtoService.getAll();
+		List<ProdutoDTO> actual = produtoService.getAllActive();
 		Assert.assertEquals(expected, actual);
 
 	}

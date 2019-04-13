@@ -48,7 +48,7 @@ public class Produto {
 
 	public void inativar() {
 		if (!ProdutoStatus.ATIVO.equals(this.status)) {
-			throw new RuntimeException("Produto est� " + this.status);
+			throw new RuntimeException("Produto esta " + this.status);
 		}
 		this.status = ProdutoStatus.INATIVO;
 	}

@@ -73,6 +73,11 @@ public class Cliente {
 		return ClienteStatus.ATIVO.equals(this.status);
 	}
 
+	public void marcarComoExcluido() {
+		this.status = ClienteStatus.EXCLUIDO;
+		
+	}
+	
 	public void inativar() {
 		if (!this.isAtivo()) {
 			throw new RuntimeException("Produto está " + this.status);
